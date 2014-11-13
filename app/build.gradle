@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 21
+    buildToolsVersion "21.0.0"
+    defaultConfig {
+        applicationId "net.rbcode.dbaile"
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 25
+        versionName "1.2.1"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlign true
+            debuggable false
+            jniDebugBuild false
+            renderscriptDebugBuild false
+        }
+        debug {
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.android.gms:play-services:6.1.71'
+}

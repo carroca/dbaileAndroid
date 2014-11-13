@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DBaile</string>
+
+    <!-- Nombre de las actividades -->
+    <string name="title_activity_evento">Evento</string>
+    <string name="title_activity_buscarevento_activity">Buscar eventos</string>
+    <string name="title_activity_listar_eventos_buscados">Eventos Buscados</string>
+    <string name="title_activity_configuracion">Opciones</string>
+    <string name="title_activity_ver_imagen">Imagen</string>
+
+    <!-- Nombre de los menus -->
+    <string name="add_favotiro">Añadir a favorito</string>
+    <string name="facebook_share">Facebook</string>
+    <string name="action_settings">Opciones</string>
+    <string name="action_help">Ayuda</string>
+    <string name="action_whois">Acerca de</string>
+    <string name="title_activity_ayuda">Ayuda</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Textos para opciones -->
+
+    <string name="opcion_filtro_para_portada">Filtrar en portada</string>
+
+    <!-- Textos -->
+
+    <string name="texto_ayuda">Si necesitas ayuda o encuentras algun fallo en la app, puedes contactar con nosotros
+    a traves de android.app@dbaile.com</string>
+
+    <!-- Dialogos -->
+
+    <string name="dialog_eventos_no_encontrados">No se encontraron eventos</string>
+    <string name="dialog_seleccionar_disciplina">Selecciona las disciplinas</string>
+
+    <!-- Varios -->
+
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="back">Atras</string>
+
+</resources>

@@ -1,0 +1,288 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#E2F4FB"
+    tools:context="net.rbcode.dbaile.ConfiguracionActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/RelativeLayout">
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Avisar de nuevos eventos"
+                android:id="@+id/switchActivarAlerta"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:onClick="guardarAvisoEvento"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separadorActivarDisciplina"
+                android:layout_below="@+id/switchActivarAlerta"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Avisar por disciplina"
+                android:onClick="guardarAvisoEventoDisciplina"
+                android:id="@+id/switchActivarDisciplina"
+                android:layout_below="@+id/separadorActivarDisciplina"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Seleccionar disciplinas"
+                android:id="@+id/buttonOpcionesEventoDisciplina"
+                android:layout_below="@+id/switchActivarDisciplina"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:onClick="abrirDialogo"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:longClickable="false"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+
+
+            <!--<Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerOpcionesEventoDisciplina"
+                android:layout_below="@+id/switchActivarDisciplina"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:spinnerMode="dialog"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:longClickable="false"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" /> -->
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separadorDisciplinaProvincia"
+                android:layout_below="@+id/buttonOpcionesEventoDisciplina"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Avisar por provincia"
+                android:id="@+id/switchActivarProvincias"
+                android:onClick="guardarAvisoEventoProvincias"
+                android:layout_below="@+id/separadorDisciplinaProvincia"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerOpcionesEventoProvincia"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:spinnerMode="dialog"
+                android:layout_below="@+id/switchActivarProvincias"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+
+            <!-- Comienzan las opciones de configuracion de la portada -->
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separadorProvinciaOpcionEnPortada"
+                android:layout_below="@+id/spinnerOpcionesEventoProvincia"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/opcion_filtro_para_portada"
+                android:onClick="guardarAvisoEnPortada"
+                android:id="@+id/switchActivarOpcionEnPortada"
+                android:layout_below="@+id/separadorProvinciaOpcionEnPortada"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Configuracion de las disciplinas en la portada -->
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separadorPortadaActivaDisciplinas"
+                android:layout_below="@+id/switchActivarOpcionEnPortada"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Filtrar por disciplina"
+                android:onClick="guardarPortadaDisciplina"
+                android:id="@+id/switchActivarPortadaDisciplina"
+                android:layout_below="@+id/separadorPortadaActivaDisciplinas"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Seleccionar disciplinas"
+                android:id="@+id/buttonOpcionesPortadaDisciplina"
+                android:layout_below="@+id/switchActivarPortadaDisciplina"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:onClick="abrirDialogoPortada"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:longClickable="false"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+
+            <!-- Configuracion de las provincias en la portada -->
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separadorPortadaDisciplinaProvincia"
+                android:layout_below="@+id/buttonOpcionesPortadaDisciplina"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Filtrar por provincia"
+                android:id="@+id/switchActivarPortadaProvincias"
+                android:onClick="guardarPortadaProvincias"
+                android:layout_below="@+id/separadorPortadaDisciplinaProvincia"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerOpcionesPortadaProvincia"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:spinnerMode="dialog"
+                android:layout_below="@+id/switchActivarPortadaProvincias"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+
+            <!--<View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/separadorAlertasDeFavortios"
+                android:layout_below="@+id/spinnerOpcionesEventoProvincia"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Avisar los eventos favoritos"
+                android:id="@+id/switchActivarAlertaFavoritos"
+                android:layout_below="@+id/separadorAlertasDeFavortios"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:onClick="guardarAvisoFavoritos"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp" /> -->
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

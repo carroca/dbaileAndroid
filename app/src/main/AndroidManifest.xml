@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.rbcode.dbaile" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".StartActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EventoActivity"
+            android:label="@string/title_activity_evento" >
+        </activity>
+        <activity
+            android:name=".buscarevento_activity"
+            android:label="@string/title_activity_buscarevento_activity" >
+        </activity>
+        <activity
+            android:name=".ListarEventosBuscadosActivity"
+            android:label="@string/title_activity_listar_eventos_buscados" >
+        </activity>
+        <activity
+            android:name=".ConfiguracionActivity"
+            android:label="@string/title_activity_configuracion" >
+        </activity>
+
+        <receiver android:name=".AlarmReceiver" />
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".SchedulingService" />
+
+        <receiver android:name=".AlarmReceiverFavoritos" />
+        <receiver
+            android:name=".BootReceiverFavoritos"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".SchedulingServiceFavoritos" />
+
+        <activity
+            android:name=".VerImagenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_ver_imagen"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name=".AyudaActivity"
+            android:label="@string/title_activity_ayuda" >
+        </activity>
+    </application>
+
+</manifest>
