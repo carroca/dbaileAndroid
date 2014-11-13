@@ -76,6 +76,19 @@ public class ListarEventosBuscadosActivity extends Activity {
 
     }
 
+    @Override
+    public void onPause() {
+        /***
+         * Evita que la aplicacion falle al girar el dispositivo
+         * elimiando el dialogo
+         */
+        super.onPause();
+
+        if ((pDialog != null) && pDialog.isShowing())
+            pDialog.dismiss();
+        pDialog = null;
+    }
+
     public void nuevaActividad(int pos) {
         Intent pantalla = new Intent(this, EventoActivity.class);
         pantalla.putExtra("NID", nid[pos]);
@@ -257,7 +270,10 @@ public class ListarEventosBuscadosActivity extends Activity {
                 });
 
                 //Elimina el dialogo que aparece de cargando eventos
-                pDialog.dismiss();
+                //pDialog.dismiss();
+                if ((pDialog != null) && pDialog.isShowing()) {
+                    pDialog.dismiss();
+                }
             } else {
 
                 new AlertDialog.Builder(ListarEventosBuscadosActivity.this)

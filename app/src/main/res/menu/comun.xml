@@ -4,6 +4,9 @@
     <item android:id="@+id/action_configuracion"
         android:title="@string/action_settings"
         android:showAsAction="never" />
+    <item android:id="@+id/action_ver_favoritos"
+        android:title="@string/action_ver_favoritos"
+        android:showAsAction="never" />
     <!--<item android:id="@+id/action_whois"
         android:title="@string/action_whois"
         android:showAsAction="never" />

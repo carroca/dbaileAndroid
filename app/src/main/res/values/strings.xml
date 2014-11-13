@@ -17,8 +17,8 @@
     <string name="action_help">Ayuda</string>
     <string name="action_whois">Acerca de</string>
     <string name="title_activity_ayuda">Ayuda</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="action_ver_favoritos">Ver los favoritos</string>
+    action_ver_favoritos
     <!-- Textos para opciones -->
 
     <string name="opcion_filtro_para_portada">Filtrar en portada</string>
@@ -38,5 +38,7 @@
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="back">Atras</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_ver_favoritos">VerFavoritosActivity</string>
 
 </resources>

@@ -30,7 +30,7 @@ public class ConfiguracionActivity extends Activity {
     Spinner spiDis, spiAlaProvincia, spiPorProvincia;
     Comunidades com;
     SharedPreferences wp;
-    Switch swiAlaAviso, swiAlaProvincia, swiAlaDisciplina, saf,swiFilEnPortada,
+    Switch swiAlaAviso, swiAlaProvincia, swiAlaDisciplina, swiActFavoritos,swiFilEnPortada,
             swiFilEnPorDisciplina, swiFilEnPorProvincia;
 
     ArrayList portadaSelectedItems, avisoSelectedItems;
@@ -72,7 +72,7 @@ public class ConfiguracionActivity extends Activity {
         swiFilEnPortada = (Switch) findViewById(R.id.switchActivarOpcionEnPortada);
         swiFilEnPorDisciplina = (Switch) findViewById(R.id.switchActivarPortadaDisciplina);
         swiFilEnPorProvincia = (Switch) findViewById(R.id.switchActivarPortadaProvincias);
-        //saf = (Switch) findViewById(R.id.switchActivarAlertaFavoritos);
+        swiActFavoritos = (Switch) findViewById(R.id.switchActivarAlertaFavoritos);
 
         /*spiDis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -246,9 +246,8 @@ public class ConfiguracionActivity extends Activity {
         editor.commit();
     }
 
-
-    /*public void guardarAvisoFavoritos(View v){
-        if(saf.isChecked()) {
+    public void guardarAvisoFavoritos(View v){
+        if(swiActFavoritos.isChecked()) {
             editor.putBoolean("opcionesAlarmaEventosFavoritos", true);
             alarmFav.setAlarm(context);
         } else {
@@ -256,7 +255,7 @@ public class ConfiguracionActivity extends Activity {
             alarmFav.cancelAlarm(context);
         }
         editor.commit();
-    }*/
+    }
 
     /*********
      * Prepara el dialogo para las alertas

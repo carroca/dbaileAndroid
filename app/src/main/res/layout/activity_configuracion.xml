@@ -253,12 +253,12 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp" />
 
-            <!--<View
+            <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:background="@android:color/darker_gray"
                 android:id="@+id/separadorAlertasDeFavortios"
-                android:layout_below="@+id/spinnerOpcionesEventoProvincia"
+                android:layout_below="@+id/spinnerOpcionesPortadaProvincia"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_margin="8dp"
@@ -277,7 +277,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_margin="8dp"
-                android:layout_marginBottom="8dp" /> -->
+                android:layout_marginBottom="8dp" />
 
         </RelativeLayout>
     </ScrollView>

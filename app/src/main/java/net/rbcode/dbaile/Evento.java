@@ -10,18 +10,21 @@ import org.json.JSONObject;
 public class Evento {
 
     protected int nid;
-    protected String title;
-    protected String body;
-    protected String imgUrl;
-    protected String imgUri;
-    protected String author;
+    protected String title = "";
+    protected String body = "";
+    protected String imgUrl = "";
+    protected String imgUri = "";
+    protected String author = "";
+    protected String fecha = "";
+    protected String provincia = "";
+    protected String ciudad = "";
+    protected String calle = "";
+    protected String codigoPostal = "";
+    protected String precio = "";
+    protected String disciplina = "";
     protected Bitmap img;
-    protected String fecha;
-    protected String provincia;
-    protected String ciudad;
-    protected String precio;
     protected JSONObject disciplinaJObject;
-    protected String disciplina;
+
 
     public Evento(){}
 
@@ -91,6 +94,31 @@ public class Evento {
 
     public String getProvincia(){ return this.provincia; }
 
+    public Evento setCiudad(String n){
+        this.ciudad = n;
+        return this;
+    }
+
+    public String getCiudad(){ return this.ciudad; }
+
+    public Evento setCalle(String n){
+        this.calle = n;
+        return this;
+    }
+
+    public String getCalle(){ return this.calle; }
+
+    public Evento setCodigoPostal(String n){
+        this.codigoPostal = n;
+        return this;
+    }
+
+    public String getCodigoPostal(){ return this.codigoPostal; }
+
+    public String getDireccion(){
+        return ciudad + " (" + provincia + ") " + calle;
+    }
+
     public Evento setPrecio(String n){
         this.precio = n;
         return this;
@@ -98,12 +126,7 @@ public class Evento {
 
     public String getPrecio(){ return this.precio; }
 
-    public Evento setCiudad(String n){
-        this.ciudad = n;
-        return this;
-    }
 
-    public String getCiudad(){ return this.ciudad; }
 
     public Evento setDisciplinaJObject(JSONObject n){
         this.disciplinaJObject = n;

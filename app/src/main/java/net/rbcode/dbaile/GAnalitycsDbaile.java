@@ -17,7 +17,6 @@ public class GAnalitycsDbaile {
     private Context context;
     private String nombre;
 
-
     /**
      * Enum used to identify the tracker that needs to be used for tracking.
      *
@@ -35,11 +34,11 @@ public class GAnalitycsDbaile {
     }
 
     public void enviarDatos(){
-        GoogleAnalytics.getInstance(context).newTracker(PROPERTY_ID);
+        /*GoogleAnalytics.getInstance(context).newTracker(PROPERTY_ID);
         GoogleAnalytics.getInstance(context).getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
         tracker = getTracker(TrackerName.APP_TRACKER);
         tracker.setScreenName(nombre);
-        tracker.send(new HitBuilders.AppViewBuilder().build());
+        tracker.send(new HitBuilders.AppViewBuilder().build());*/
     }
 
     //Obtenido de https://developers.google.com/analytics/devguides/collection/android/v4/?hl=es

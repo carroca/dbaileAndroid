@@ -27,6 +27,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -85,6 +86,19 @@ public class EventoActivity extends Activity {
     }
 
     @Override
+    public void onPause() {
+        /***
+         * Evita que la aplicacion falle al girar el dispositivo
+         * elimiando el dialogo
+         */
+        super.onPause();
+
+        if ((pDialog != null) && pDialog.isShowing())
+            pDialog.dismiss();
+        pDialog = null;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.start, menu);
@@ -92,8 +106,8 @@ public class EventoActivity extends Activity {
         //inflater2.inflate(R.menu.share, menu);
         MenuInflater menuComun = getMenuInflater();
         menuComun.inflate(R.menu.comun, menu);
-        //MenuInflater inflater2 = getMenuInflater();
-        //inflater2.inflate(R.menu.evento, menu);
+        MenuInflater inflater2 = getMenuInflater();
+        inflater2.inflate(R.menu.evento, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -151,13 +165,8 @@ public class EventoActivity extends Activity {
             tvfec.setText(e.getFecha());
         }
 
-        if(e.getProvincia() != null) {
-            direccion = e.getProvincia();
-            //tvpro.setText(e.getProvincia());
-        }
-
-        if(e.getCiudad() != null) {
-            tvciu.setText(direccion + " " + e.getCiudad());
+        if(e.getDireccion() != null) {
+            tvciu.setText(e.getDireccion());
         }
 
         if(e.getDisciplina() != null) {
@@ -288,6 +297,8 @@ public class EventoActivity extends Activity {
                             .getJSONObject(0);
                     e.setProvincia(comodin.getString("province_name"));
                     e.setCiudad(comodin.getString("city"));
+                    e.setCalle(comodin.getString("street"));
+                    e.setCodigoPostal(comodin.getString("postal_code"));
 
                 } catch (Exception err){
                     Log.e("Ubicacion", err.getMessage());
@@ -307,9 +318,12 @@ public class EventoActivity extends Activity {
         //executed after the background nodes fetching process is complete
         protected void onPostExecute(JSONObject r) {
 
-            //if(e.getImg() != null){
-                establecerCampos();
+            if ((pDialog != null) && pDialog.isShowing()) {
                 pDialog.dismiss();
+            }
+            //if(e.getImg() != null){
+            establecerCampos();
+               // pDialog.dismiss();
             //}else{
             //    pDialog.dismiss();
             //    Toast.makeText(EventoActivity.this, "Ha habido algun problema con el evento o hay un error de conexion a internet", Toast.LENGTH_SHORT).show();
@@ -360,11 +374,13 @@ public class EventoActivity extends Activity {
 
         String disciplinas = "";
 
-        JSONObject json = (e.getDisciplinaJObject());
+
+
         try {
+            JSONArray json = e.getDisciplinaJObject().getJSONArray("und");
             for(int i = 0; i < json.length(); i++){
-                int name = json.getJSONArray("und").getJSONObject(i).getInt("target_id");
-                disciplinas += map.get(name) + ", ";
+                int name = json.getJSONObject(i).getInt("target_id");
+                disciplinas = disciplinas + map.get(name) + ", ";
             }
         } catch (Exception err) {
             Log.e("Error al generar las disciplinas", err.getMessage());

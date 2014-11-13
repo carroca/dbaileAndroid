@@ -61,6 +61,19 @@ public class StartActivity extends Activity {
 
     }
 
+    @Override
+    public void onPause() {
+        /***
+         * Evita que la aplicacion falle al girar el dispositivo
+         * elimiando el dialogo
+         */
+        super.onPause();
+
+        if ((pDialog != null) && pDialog.isShowing())
+            pDialog.dismiss();
+        pDialog = null;
+    }
+
     public void nuevaActividad(int pos) {
         Intent pantalla = new Intent(this, EventoActivity.class);
         pantalla.putExtra("NID", nid[pos]);
@@ -88,9 +101,12 @@ public class StartActivity extends Activity {
                 pantalla = new Intent(this, buscarevento_activity.class);
                 startActivity(pantalla);
                 return true;
-
             case R.id.action_configuracion:
                 pantalla = new Intent(this, ConfiguracionActivity.class);
+                startActivity(pantalla);
+                return true;
+            case R.id.action_ver_favoritos:
+                pantalla = new Intent(this, VerFavoritosActivity.class);
                 startActivity(pantalla);
                 return true;
             /*case R.id.action_help:
@@ -240,7 +256,10 @@ public class StartActivity extends Activity {
             });
 
             //Elimina el dialogo que aparece de cargando eventos
-            pDialog.dismiss();
+            //pDialog.dismiss();
+            if ((pDialog != null) && pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
         }
 
         private Bitmap downloadImage(String url) {
