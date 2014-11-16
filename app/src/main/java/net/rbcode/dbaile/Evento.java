@@ -22,6 +22,7 @@ public class Evento {
     protected String codigoPostal = "";
     protected String precio = "";
     protected String disciplina = "";
+    protected String imgName = "";
     protected Bitmap img;
     protected JSONObject disciplinaJObject;
 
@@ -79,6 +80,17 @@ public class Evento {
     public Bitmap getImg(){
         return this.img;
     }
+
+    public Evento setImgName(String n){
+        this.imgName = n;
+        return this;
+    }
+
+    public String getImgName(){
+        return this.imgName;
+    }
+
+
 
     public Evento setFecha(String n){
         this.fecha = n;

@@ -73,7 +73,7 @@ public class SchedulingServiceFavoritos extends IntentService {
     private void comprobarEventos(){
         Calendar cal = Calendar.getInstance();
         ano = cal.get(Calendar.YEAR);
-        mes = cal.get(Calendar.MONTH);
+        mes = cal.get(Calendar.MONTH) + 1;
         dia = cal.get(Calendar.DAY_OF_MONTH);
 
         String fecha = Integer.toString(ano) + "-";
@@ -91,7 +91,6 @@ public class SchedulingServiceFavoritos extends IntentService {
             editor.apply();
             sendNotification(c.getString(1));
         }
-
     }
     
     // Post a notification indicating whether a doodle was found.

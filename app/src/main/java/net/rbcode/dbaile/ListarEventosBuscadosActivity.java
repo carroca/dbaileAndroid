@@ -256,7 +256,7 @@ public class ListarEventosBuscadosActivity extends Activity {
                 /*************** Añadido para poner las imagenes junto a los nombres ****************/
 
                 ListaPersonalizadaInicio adapter = new
-                        ListaPersonalizadaInicio(ListarEventosBuscadosActivity.this, titulos, uriImagenes, bitmapImg);
+                        ListaPersonalizadaInicio(ListarEventosBuscadosActivity.this, titulos, bitmapImg);
                 lst = (ListView) findViewById(R.id.ListEventosBuscados);
                 lst.setAdapter(adapter);
 

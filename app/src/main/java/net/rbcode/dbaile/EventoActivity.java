@@ -2,9 +2,11 @@ package net.rbcode.dbaile;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -47,6 +49,8 @@ public class EventoActivity extends Activity {
     Map<Integer, String> map;
     SharedPreferences wp;
 
+    private Menu mOptionsMenu;
+
     private static Context context;
 
     @Override
@@ -80,9 +84,6 @@ public class EventoActivity extends Activity {
         new FetchItems().execute();
 
         context = getApplicationContext();
-
-        GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "EventoActivity");
-        gadb.enviarDatos();
     }
 
     @Override
@@ -100,14 +101,41 @@ public class EventoActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.start, menu);
-        //MenuInflater inflater2 = getMenuInflater();
-        //inflater2.inflate(R.menu.share, menu);
-        MenuInflater menuComun = getMenuInflater();
-        menuComun.inflate(R.menu.comun, menu);
+
         MenuInflater inflater2 = getMenuInflater();
         inflater2.inflate(R.menu.evento, menu);
+
+        mOptionsMenu = menu;
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.start, menu);
+
+        //MenuInflater inflater2 = getMenuInflater();
+        //inflater2.inflate(R.menu.share, menu);
+
+        MenuInflater menuComun = getMenuInflater();
+        menuComun.inflate(R.menu.comun, menu);
+
+        DbaileSQLOpenHelper dsoh =
+                new DbaileSQLOpenHelper(this, "DBdbaile", null, 1);
+
+        SQLiteDatabase db = dsoh.getWritableDatabase();
+
+        String[] campos = new String[] {"nid"};
+        String[] args = new String[] {Integer.toString(e.getNid())};
+
+        Cursor c = db.query("favoritos", campos, "nid=?", args, null, null, null);
+
+        if (c.moveToFirst()) {
+            //http://stackoverflow.com/questions/19882443/how-to-change-menuitem-icon-in-actionbar-programatically
+            mOptionsMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_action_favotiros_add));
+        } else {
+            //http://stackoverflow.com/questions/19882443/how-to-change-menuitem-icon-in-actionbar-programatically
+            mOptionsMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_action_favotiros_del));
+        }
+
+        db.close();
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -132,9 +160,9 @@ public class EventoActivity extends Activity {
                 pantalla = new Intent(this, AyudaActivity.class);
                 startActivity(pantalla);
                 return true;*/
-            /*case R.id.action_anadir_favorito:
+            case R.id.action_anadir_favorito:
                 almacenarEvento();
-                return true;*/
+                return true;
         }
         return false;
     }
@@ -179,6 +207,8 @@ public class EventoActivity extends Activity {
         cv.put("nid", e.getNid());
         cv.put("titulo", e.getTitle());
         cv.put("fecha", e.getFecha().substring(0,10));
+        cv.put("nombreImagen", e.getImgName());
+        cv.put("rutaImagen", e.getImgUri());
 
         //Abrimos la base de datos 'DBUsuarios' en modo escritura
         DbaileSQLOpenHelper dsoh =
@@ -191,8 +221,34 @@ public class EventoActivity extends Activity {
 
         Cursor c = db.query("favoritos", campos, "nid=?", args, null, null, null);
 
-        if (c.moveToFirst()) {
+        if (!c.moveToFirst()) {
             db.insert("favoritos", null, cv);
+
+            //http://stackoverflow.com/questions/19882443/how-to-change-menuitem-icon-in-actionbar-programatically
+            mOptionsMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_action_favotiros_add));
+
+            new AlertDialog.Builder(EventoActivity.this)
+                    .setTitle(R.string.dialog_eventos_anadido_favoritos)
+                    .setNeutralButton(R.string.accept, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+        } else {
+           db.delete("favoritos", "nid=?", args);
+
+            //http://stackoverflow.com/questions/19882443/how-to-change-menuitem-icon-in-actionbar-programatically
+            mOptionsMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_action_favotiros_del));
+
+            new AlertDialog.Builder(EventoActivity.this)
+                    .setTitle(R.string.dialog_eventos_eliminado_favoritos)
+                    .setNeutralButton(R.string.accept, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
         }
 
         db.close();
@@ -257,6 +313,12 @@ public class EventoActivity extends Activity {
                 }
             //Se obtiene la imagen
                 try{
+
+                    e.setImgName(json.getJSONObject("field_evento_cartel")
+                            .getJSONArray("und")
+                            .getJSONObject(0)
+                            .getString("filename"));
+
                     e.setImgUri(json.getJSONObject("field_evento_cartel")
                             .getJSONArray("und")
                             .getJSONObject(0)

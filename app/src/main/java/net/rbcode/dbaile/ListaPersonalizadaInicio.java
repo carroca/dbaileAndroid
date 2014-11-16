@@ -20,18 +20,14 @@ import java.net.URLConnection;
 public class ListaPersonalizadaInicio extends ArrayAdapter<String>{
     private final Activity context;
     private final String[] titulos;
-    private final String[] imageURL;
     private final Bitmap[] bitmapImg;
 
-    Bitmap bitmap = null;
-    String url;
-    ImageView imageView;
+    private ImageView imageView;
 
-    public ListaPersonalizadaInicio(Activity context, String[] titulos, String[] imageURL, Bitmap[] bitmapImg) {
+    public ListaPersonalizadaInicio(Activity context, String[] titulos, Bitmap[] bitmapImg) {
         super(context, R.layout.lista_personalizada_inicio, titulos);
         this.context = context;
         this.titulos = titulos;
-        this.imageURL = imageURL;
         this.bitmapImg = bitmapImg;
     }
 

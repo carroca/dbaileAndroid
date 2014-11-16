@@ -3,6 +3,8 @@ package net.rbcode.dbaile;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.*;
@@ -21,6 +23,8 @@ import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -33,6 +37,7 @@ public class StartActivity extends Activity {
     protected int[] nid;
     String[] titulos;
     String[] uriImagenes;
+    String[] nombreImagenes;
     Bitmap[] bitmapImg;
 
     ProgressDialog pDialog;
@@ -200,6 +205,7 @@ public class StartActivity extends Activity {
 
             titulos = new String[json.length()];
             uriImagenes = new String[json.length()];
+            nombreImagenes = new String[json.length()];
             bitmapImg = new Bitmap[json.length()];
 
             //iterate through JSON to read the title of nodes
@@ -212,8 +218,9 @@ public class StartActivity extends Activity {
                     }
                     titulos[i] = titulo;
                     uriImagenes[i] = "http://dbaile.com/sites/default/files/styles/medium/public" + json.getJSONObject(i).getJSONObject("cartel").getString("uri").substring(8);
+                    nombreImagenes[i] = json.getJSONObject(i).getJSONObject("cartel").getString("filename");
                     try {
-                        bitmapImg[i] = downloadImage(uriImagenes[i]);
+                        bitmapImg[i] = downloadImage(uriImagenes[i], nombreImagenes[i]);
                     } catch (Exception e) {
                         Log.e("descargar imagen: ", e.getMessage());
                     }
@@ -234,7 +241,7 @@ public class StartActivity extends Activity {
             /*************** Añadido para poner las imagenes junto a los nombres ****************/
 
             ListaPersonalizadaInicio adapter = new
-                    ListaPersonalizadaInicio(StartActivity.this, titulos, uriImagenes, bitmapImg);
+                    ListaPersonalizadaInicio(StartActivity.this, titulos, bitmapImg);
             lst=(ListView)findViewById(R.id.ListEventos);
             lst.setAdapter(adapter);
 
@@ -262,8 +269,9 @@ public class StartActivity extends Activity {
             }
         }
 
-        private Bitmap downloadImage(String url) {
+        private Bitmap downloadImage(String url, String nombreImagen) {
             Bitmap bitmap = null;
+            //bitmap = obtenerArchivos(nombreImagen);
             InputStream stream = null;
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bmOptions.inSampleSize = 1;
@@ -298,6 +306,47 @@ public class StartActivity extends Activity {
             }
             return stream;
         }
+
+
     }
+
+    /*private Bitmap obtenerArchivos(String nombre){
+        Bitmap bitmap = null;
+        //Comprueba si las imagenes estan guardadas, si no las descarga
+        DbaileSQLOpenHelper dsoh =
+                new DbaileSQLOpenHelper(this, "DBdbaile", null, 1);
+
+        SQLiteDatabase db = dsoh.getWritableDatabase();
+
+        String[] campos = new String[] {"nombre"};
+        String[] args = new String[] {nombre};
+
+        Cursor c = db.query("imagenesGuardadas", campos, "nombre=?", args, null, null, null);
+
+        if (c.moveToFirst()) {
+
+            // http://stackoverflow.com/questions/17546718/android-getting-external-storage-absolute-path
+            String dirname = context.getFilesDir() + "/img/eventos/min/";
+            File sddir = new File(dirname);
+            if (!sddir.mkdirs()) {
+                if (sddir.exists()) {
+                    try {
+                        FileOutputStream fos = new FileOutputStream(dirname + nombre);
+                        // http://www.developer.com/ws/android/programming/Working-with-Images-in-Googles-Android-3748281.htm
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fos);
+                        fos.flush();
+                        fos.close();
+                    } catch (Exception e) {
+                        Log.e("GetIMG:", e.toString());
+                    }
+                } else {
+                    return null;
+                }
+            }
+
+
+        }
+        return bitmap;
+    }*/
 
 }

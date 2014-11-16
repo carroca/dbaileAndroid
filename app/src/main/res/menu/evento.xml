@@ -3,6 +3,6 @@
     tools:context="net.rbcode.dbaile.EventoActivity" >
     <item android:id="@+id/action_anadir_favorito"
         android:title="@string/add_favotiro"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:icon="@drawable/ic_action_favotiros_del"
+        android:showAsAction="always" /> />
 </menu>

@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbaileSQLOpenHelper extends SQLiteOpenHelper  {
 
-    String sqlCreate = "CREATE TABLE favoritos (nid INTEGER, titulo TEXT, fecha TEXT)";
+    String sqlCreate = "CREATE TABLE favoritos (nid INTEGER, titulo TEXT, fecha TEXT, nombreImagen TEXT, rutaImagen);" +
+            "CREATE TABLE imagenesGuardadas (nombre TEXT);";
 
     public DbaileSQLOpenHelper(Context contexto, String nombre,
                                 CursorFactory factory, int version) {
@@ -27,9 +28,9 @@ public class DbaileSQLOpenHelper extends SQLiteOpenHelper  {
         //      a la nueva, por lo que este método debería ser más elaborado.
 
         //Se elimina la versión anterior de la tabla
-        db.execSQL("DROP TABLE IF EXISTS favoritos");
+        //db.execSQL("DROP TABLE IF EXISTS favoritos");
 
         //Se crea la nueva versión de la tabla
-        db.execSQL(sqlCreate);
+        //db.execSQL(sqlCreate);
     }
 }
