@@ -54,7 +54,7 @@ public class VerFavoritosActivity extends Activity {
         context = getApplicationContext();
         lst = (ListView) findViewById(R.id.ListEventos);
 
-        GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "StartActivity");
+        GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "VerFavoritosActivity");
         gadb.enviarDatos();
 
         obtenerEventos();
@@ -121,9 +121,10 @@ public class VerFavoritosActivity extends Activity {
                 urlImagenes[x] = "http://dbaile.com/sites/default/files/styles/medium/public" + c.getString(4);
                 x++;
             } while (c.moveToNext());
+            new FetchItems().execute();
         } else {
             new AlertDialog.Builder(VerFavoritosActivity.this)
-                    .setTitle(R.string.dialog_eventos_no_encontrados)
+                    .setTitle(R.string.dialog_eventos_favoritos_no_encontrados)
                     .setNeutralButton(R.string.back, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
@@ -132,7 +133,6 @@ public class VerFavoritosActivity extends Activity {
                     .show();
         }
 
-        new FetchItems().execute();
     }
 
     public void nuevaActividad(int pos) {

@@ -35,7 +35,7 @@
     <string name="dialog_eventos_anadido_favoritos">Se ha añadido el evento a favoritos</string>
     <string name="dialog_eventos_eliminado_favoritos">Se ha eliminado el evento de favoritos</string>
     <string name="dialog_seleccionar_disciplina">Selecciona las disciplinas</string>
-
+    <string name="dialog_eventos_favoritos_no_encontrados">No tienes ningun evento a favoritos</string>
     <!-- Varios -->
 
     <string name="accept">Aceptar</string>

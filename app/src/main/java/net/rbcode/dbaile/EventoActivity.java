@@ -156,6 +156,10 @@ public class EventoActivity extends Activity {
                 startActivity(pantalla);
                 this.finish();
                 return true;
+            case R.id.action_ver_favoritos:
+                pantalla = new Intent(this, VerFavoritosActivity.class);
+                startActivity(pantalla);
+                return true;
             /*case R.id.action_help:
                 pantalla = new Intent(this, AyudaActivity.class);
                 startActivity(pantalla);
