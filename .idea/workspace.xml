@@ -73,48 +73,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1496">
-              <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="buscarevento_activity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/buscarevento_activity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1583" max-vertical-offset="3519">
-              <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="VerFavoritosActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/VerFavoritosActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1578" max-vertical-offset="3485">
-              <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2030" max-vertical-offset="3825">
+              <caret line="155" column="5" selection-start-line="155" selection-start-column="5" selection-end-line="155" selection-end-column="5" />
               <folding>
-                <element signature="e#3973#4021#0" expanded="true" />
-                <element signature="e#4061#4074#0" expanded="true" />
-                <element signature="e#4076#4282#0" expanded="true" />
-                <element signature="e#4259#4260#0" expanded="true" />
+                <element signature="e#4137#4185#0" expanded="true" />
+                <element signature="e#4225#4238#0" expanded="true" />
+                <element signature="e#4240#4446#0" expanded="true" />
+                <element signature="e#4423#4424#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.72" vertical-offset="0" max-vertical-offset="901">
-              <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+            <state vertical-scroll-proportion="-3.8" vertical-offset="92" max-vertical-offset="612">
+              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -123,28 +101,20 @@
       <file leaf-file-name="GAnalitycsDbaile.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/GAnalitycsDbaile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22884615" vertical-offset="85" max-vertical-offset="884">
-              <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-              <folding />
+            <state vertical-scroll-proportion="0.03269231" vertical-offset="85" max-vertical-offset="884">
+              <caret line="13" column="60" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="60" />
+              <folding>
+                <element signature="e#486#508#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="ConfiguracionActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/ConfiguracionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventoActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/EventoActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="7259">
-              <caret line="161" column="28" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="8483">
+              <caret line="134" column="23" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -153,8 +123,8 @@
       <file leaf-file-name="StartActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/StartActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="5508">
-              <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="115" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3723" max-vertical-offset="5508">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -986,7 +956,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4238285071061" />
+        <entry key="$PROJECT_DIR$" value="4238287344021" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1275,7 +1245,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/SchedulingService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_buscarevento_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/GoogleAnalytics.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/ConfiguracionActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/Evento.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/evento.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/DbaileSQLOpenHelper.java" />
@@ -1290,8 +1259,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/AlarmReceiverFavoritos.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/buscarevento_activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/EventoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/VerFavoritosActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/ConfiguracionActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/VerFavoritosActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/GAnalitycsDbaile.java" />
       </list>
@@ -1409,36 +1379,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbaileAndroid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbaileAndroid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1719,8 +1659,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1801,10 +1741,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/VerFavoritosActivity.java</url>
+          <line>119</line>
+          <properties />
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="122" />
+      <option name="time" value="124" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -2124,13 +2072,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1632">
           <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/ConfiguracionActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3519" max-vertical-offset="8483">
-          <caret line="397" column="0" selection-start-line="397" selection-start-column="0" selection-end-line="397" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2165,14 +2107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/StartActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="5508">
-          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="115" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/EventoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="7259">
@@ -2191,19 +2125,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/VerFavoritosActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1578" max-vertical-offset="3485">
-          <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-          <folding>
-            <element signature="e#3973#4021#0" expanded="true" />
-            <element signature="e#4061#4074#0" expanded="true" />
-            <element signature="e#4076#4282#0" expanded="true" />
-            <element signature="e#4259#4260#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.72" vertical-offset="0" max-vertical-offset="901">
@@ -2212,19 +2133,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/ConfiguracionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="8483">
+          <caret line="134" column="23" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/VerFavoritosActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2030" max-vertical-offset="3825">
+          <caret line="155" column="5" selection-start-line="155" selection-start-column="5" selection-end-line="155" selection-end-column="5" />
+          <folding>
+            <element signature="e#4137#4185#0" expanded="true" />
+            <element signature="e#4225#4238#0" expanded="true" />
+            <element signature="e#4240#4446#0" expanded="true" />
+            <element signature="e#4423#4424#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/StartActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3723" max-vertical-offset="5508">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state vertical-scroll-proportion="-3.8" vertical-offset="92" max-vertical-offset="612">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/net/rbcode/dbaile/GAnalitycsDbaile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22884615" vertical-offset="85" max-vertical-offset="884">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
+        <state vertical-scroll-proportion="0.03269231" vertical-offset="85" max-vertical-offset="884">
+          <caret line="13" column="60" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="60" />
+          <folding>
+            <element signature="e#486#508#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

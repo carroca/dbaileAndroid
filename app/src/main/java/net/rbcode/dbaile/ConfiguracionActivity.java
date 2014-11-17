@@ -132,7 +132,7 @@ public class ConfiguracionActivity extends Activity {
         swiFilEnPorDisciplina.setChecked(wp.getBoolean("opcionesPortadaDisciplina", false));
         swiFilEnPorProvincia.setChecked(wp.getBoolean("opcionesPortadaProvincias", false));
 
-        //saf.setChecked(wp.getBoolean("opcionesAlarmaEventosFavoritos", false));
+        swiActFavoritos.setChecked(wp.getBoolean("opcionesAlarmaEventosFavoritos", false));
 
         rellenarProvincias();
         //rellenarDisciplinas();

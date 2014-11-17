@@ -117,7 +117,13 @@ public class VerFavoritosActivity extends Activity {
 
             do {
                 nid[x] = c.getInt(0);
-                titulos[x] = c.getString(1);
+
+                if(c.getString(1).length() > 70){
+                    titulos[x] = c.getString(1).substring(0,70);
+                } else {
+                    titulos[x] = c.getString(1);
+                }
+
                 urlImagenes[x] = "http://dbaile.com/sites/default/files/styles/medium/public" + c.getString(4);
                 x++;
             } while (c.moveToNext());
@@ -133,6 +139,20 @@ public class VerFavoritosActivity extends Activity {
                     .show();
         }
 
+    }
+
+
+    @Override
+    public void onPause() {
+        /***
+         * Evita que la aplicacion falle al girar el dispositivo
+         * elimiando el dialogo
+         */
+        super.onPause();
+
+        if ((pDialog != null) && pDialog.isShowing())
+            pDialog.dismiss();
+        pDialog = null;
     }
 
     public void nuevaActividad(int pos) {
