@@ -14,11 +14,16 @@
     <!-- Nombre de los menus -->
     <string name="add_favotiro">Añadir a favorito</string>
     <string name="facebook_share">Facebook</string>
+    <string name="twitter_share">Twitter</string>
+    <string name="google_plus_share">Google+</string>
+    <string name="whatsapp_share">Whatsapp</string>
     <string name="action_settings">Opciones</string>
     <string name="action_help">Ayuda</string>
     <string name="action_whois">Acerca de</string>
     <string name="title_activity_ayuda">Ayuda</string>
     <string name="action_ver_favoritos">Ver los favoritos</string>
+    <string name="action_siguiente">Siguiente pagina</string>
+    <string name="action_anterior">Pagina anterior</string>
     action_ver_favoritos
     <!-- Textos para opciones -->
 
@@ -42,6 +47,6 @@
     <string name="cancel">Cancelar</string>
     <string name="back">Atras</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="app_id">1513825982200241</string>
 
 </resources>

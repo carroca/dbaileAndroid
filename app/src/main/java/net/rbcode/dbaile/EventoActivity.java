@@ -9,20 +9,30 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
+import com.google.android.gms.plus.PlusShare;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -37,6 +47,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 public class EventoActivity extends Activity {
@@ -48,6 +60,7 @@ public class EventoActivity extends Activity {
     protected Comunidades com = new Comunidades();
     Map<Integer, String> map;
     SharedPreferences wp;
+    private UiLifecycleHelper uiHelper;
 
     private Menu mOptionsMenu;
 
@@ -55,6 +68,10 @@ public class EventoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Para compartir con facebook
+        uiHelper = new UiLifecycleHelper(this, null);
+        uiHelper.onCreate(savedInstanceState);
 
         Taxonomias tax = new Taxonomias();
 
@@ -68,10 +85,18 @@ public class EventoActivity extends Activity {
         tvdes = (TextView) findViewById(R.id.textDescripcion);
         tvfec = (TextView) findViewById(R.id.textFecha);
         tvciu = (TextView) findViewById(R.id.textCiudad);
-        //tvpre = (TextView) findViewById(R.id.textPrecio);
-        //tvpro = (TextView) findViewById(R.id.textProvincia);
         tvdis = (TextView) findViewById(R.id.textDisciplina);
         ivc = (ImageView) findViewById(R.id.imgCartel);
+
+        context = getApplicationContext();
+
+        GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "EventoActivity");
+        gadb.enviarDatos();
+
+        //Carga la publicidad
+        LinearLayout layout = (LinearLayout)findViewById(R.id.publicidadLayout);
+        AdMobDbaile amd = new AdMobDbaile(context, layout);
+        amd.load();
 
         if(getIntent().getIntExtra("NID", -1) != -1){
             this.e.setNid(getIntent().getExtras().getInt("NID"));
@@ -82,8 +107,6 @@ public class EventoActivity extends Activity {
 
         map = tax.obtenerTaxonomiaMapa();
         new FetchItems().execute();
-
-        context = getApplicationContext();
     }
 
     @Override
@@ -97,6 +120,30 @@ public class EventoActivity extends Activity {
         if ((pDialog != null) && pDialog.isShowing())
             pDialog.dismiss();
         pDialog = null;
+        uiHelper.onPause();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
+
+        if ((pDialog != null) && pDialog.isShowing())
+            pDialog.dismiss();
+        pDialog = null;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        uiHelper.onResume();
     }
 
     @Override
@@ -107,11 +154,11 @@ public class EventoActivity extends Activity {
 
         mOptionsMenu = menu;
 
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.start, menu);
+        /*MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.start, menu);*/
 
-        //MenuInflater inflater2 = getMenuInflater();
-        //inflater2.inflate(R.menu.share, menu);
+        MenuInflater inflaterShare = getMenuInflater();
+        inflaterShare.inflate(R.menu.share, menu);
 
         MenuInflater menuComun = getMenuInflater();
         menuComun.inflate(R.menu.comun, menu);
@@ -166,6 +213,15 @@ public class EventoActivity extends Activity {
                 return true;*/
             case R.id.action_anadir_favorito:
                 almacenarEvento();
+                return true;
+            case R.id.whatsapp_share:
+                shareWhatsapp();
+                return true;
+            case R.id.google_plus_share:
+                shareGooglePlus();
+                return true;
+            case R.id.facebook_share:
+                shareFacebook();
                 return true;
         }
         return false;
@@ -371,12 +427,19 @@ public class EventoActivity extends Activity {
                 }
 
             //Se obtienen las disciplinas
-                try{
-                    e.setDisciplinaJObject(json.getJSONObject("field_disciplina"));
-                    generarDisciplinasString();
-                } catch (Exception err){
-                    Log.e("Disciplina", err.getMessage());
-                }
+            try{
+                e.setDisciplinaJObject(json.getJSONObject("field_disciplina"));
+                generarDisciplinasString();
+            } catch (Exception err){
+                Log.e("Disciplina", err.getMessage());
+            }
+
+            //Se obtienen la ruta de la web
+            try{
+                e.setPath(json.getString("path"));
+            } catch (Exception err){
+                Log.e("Path", err.getMessage());
+            }
 
             return json;
         }
@@ -440,8 +503,6 @@ public class EventoActivity extends Activity {
 
         String disciplinas = "";
 
-
-
         try {
             JSONArray json = e.getDisciplinaJObject().getJSONArray("und");
             for(int i = 0; i < json.length(); i++){
@@ -453,6 +514,55 @@ public class EventoActivity extends Activity {
             err.printStackTrace();
         }
         e.setDisciplina(disciplinas);
+    }
+
+    public void shareWhatsapp()
+    {
+        String message;
+        message = "Mira este evento en dbaile: " + e.getPath();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        sendIntent.setType("text/plain");
+        sendIntent.setPackage("com.whatsapp");
+        startActivity(sendIntent);
+    }
+    public void shareGooglePlus()
+    {
+        String message;
+        message = "Mira este evento " + e.getPath();
+        // Launch the Google+ share dialog with attribution to your app.
+        Intent shareIntent = new PlusShare.Builder(this)
+                .setType("text/plain")
+                .setText("Mira este evento de dbaile:")
+                .setContentUrl(Uri.parse(e.getPath()))
+                .getIntent();
+
+        startActivityForResult(shareIntent, 0);
+    }
+
+    public void shareFacebook()
+    {
+
+        if (FacebookDialog.canPresentShareDialog(getApplicationContext(),
+                FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
+            // Publish the post using the Share Dialog
+            FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
+                    .setLink(e.getPath())
+                    .setPicture(e.getImgUrl())
+                    .setName(e.getTitle())
+                    .setDescription(e.getBody().substring(0,200)+"...")
+                    .build();
+            uiHelper.trackPendingDialogCall(shareDialog.present());
+
+        } else {
+            // Fallback. For example, publish the post using the Feed Dialog
+        }
+    }
+
+    public void shareTwitter()
+    {
+
     }
 
 }

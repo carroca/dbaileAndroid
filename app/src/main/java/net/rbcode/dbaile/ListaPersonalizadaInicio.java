@@ -17,18 +17,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class ListaPersonalizadaInicio extends ArrayAdapter<String>{
+public class ListaPersonalizadaInicio extends ArrayAdapter<String> {
     private final Activity context;
     private final String[] titulos;
+    private final String[] fechas;
     private final Bitmap[] bitmapImg;
 
     private ImageView imageView;
 
-    public ListaPersonalizadaInicio(Activity context, String[] titulos, Bitmap[] bitmapImg) {
+    public ListaPersonalizadaInicio(Activity context, String[] titulos, Bitmap[] bitmapImg, String[] fechas) {
         super(context, R.layout.lista_personalizada_inicio, titulos);
         this.context = context;
         this.titulos = titulos;
         this.bitmapImg = bitmapImg;
+        this.fechas = fechas;
     }
 
     @Override
@@ -42,7 +44,10 @@ public class ListaPersonalizadaInicio extends ArrayAdapter<String>{
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txtLista);
         imageView = (ImageView) rowView.findViewById(R.id.imgLista);
+        TextView txtFecha = (TextView) rowView.findViewById(R.id.txtFecha);
+
         txtTitle.setText(titulos[position]);
+        txtFecha.setText(fechas[position]);
 
         try {
             imageView.setImageBitmap(bitmapImg[position]);

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -52,6 +53,11 @@ public class ConfiguracionActivity extends Activity {
 
         GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "ConfiguracionActivity");
         gadb.enviarDatos();
+
+        //Carga la publicidad
+        LinearLayout layout = (LinearLayout)findViewById(R.id.publicidadLayout);
+        AdMobDbaile amd = new AdMobDbaile(context, layout);
+        amd.load();
 
         wp =  getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         editor = wp.edit();

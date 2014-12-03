@@ -2,9 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="net.rbcode.dbaile.ListarEventosBuscadosActivity"
     android:icon="@drawable/ic_action_share" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
+    <item android:id="@+id/action_siguiente"
+        android:title="@string/action_siguiente"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_anterior"
+        android:title="@string/action_anterior"
         android:showAsAction="never" />
 
 </menu>

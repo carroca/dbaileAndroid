@@ -10,6 +10,15 @@
             <item android:id="@+id/facebook_share"
                 android:title="@string/facebook_share"
                 android:icon="@drawable/facebook_icon"/>
+            <!--<item android:id="@+id/twitter_share"
+                android:title="@string/twitter_share"
+                android:icon="@drawable/twitter_icon"/>-->
+            <item android:id="@+id/whatsapp_share"
+                android:title="@string/whatsapp_share"
+                android:icon="@drawable/whatsapp_icon"/>
+            <item android:id="@+id/google_plus_share"
+                android:title="@string/google_plus_share"
+                android:icon="@drawable/google_plus_icon"/>
         </menu>
 
     </item>

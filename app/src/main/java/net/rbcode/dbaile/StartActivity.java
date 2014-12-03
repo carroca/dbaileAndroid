@@ -1,12 +1,14 @@
 package net.rbcode.dbaile;
 
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.*;
 import android.app.Activity;
 import android.util.Log;
@@ -14,6 +16,11 @@ import android.view.Menu;
 import android.view.*;
 import android.widget.*;
 import android.content.Intent;
+
+import com.facebook.AppEventsLogger;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import org.apache.http.util.*;
 import org.apache.http.HttpResponse;
@@ -24,6 +31,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +46,9 @@ public class StartActivity extends Activity {
     String[] titulos;
     String[] uriImagenes;
     String[] nombreImagenes;
+    String[] fechas;
     Bitmap[] bitmapImg;
+    int pagina = 0;
 
     ProgressDialog pDialog;
 
@@ -49,6 +59,8 @@ public class StartActivity extends Activity {
 
     private static Context context;
 
+    private AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,12 +69,24 @@ public class StartActivity extends Activity {
 
         wp = getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
+        if(getIntent().getIntExtra("pagina", 0) != 0){
+            pagina = getIntent().getExtras().getInt("pagina");
+        } else {
+            pagina = 0;
+        }
+
         new FetchItems().execute();
 
         context = getApplicationContext();
 
+        //Carga analitycs
         GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "StartActivity");
         gadb.enviarDatos();
+
+        //Carga la publicidad
+        LinearLayout layout = (LinearLayout)findViewById(R.id.publicidadLayout);
+        AdMobDbaile amd = new AdMobDbaile(context, layout);
+        amd.load();
 
     }
 
@@ -77,6 +101,16 @@ public class StartActivity extends Activity {
         if ((pDialog != null) && pDialog.isShowing())
             pDialog.dismiss();
         pDialog = null;
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
     }
 
     public void nuevaActividad(int pos) {
@@ -114,6 +148,21 @@ public class StartActivity extends Activity {
                 pantalla = new Intent(this, VerFavoritosActivity.class);
                 startActivity(pantalla);
                 return true;
+            case R.id.action_siguiente:
+                pantalla = new Intent(this, StartActivity.class);
+                pantalla.putExtra("pagina", (pagina + 1));
+                startActivity(pantalla);
+                this.finish();
+                return true;
+            case R.id.action_anterior:
+                if(pagina != 0) {
+                    pantalla = new Intent(this, StartActivity.class);
+                    pantalla.putExtra("pagina", (pagina - 1));
+                    startActivity(pantalla);
+                    this.finish();
+                    return true;
+                }
+                return false;
             /*case R.id.action_help:
                 pantalla = new Intent(this, AyudaActivity.class);
                 startActivity(pantalla);
@@ -124,14 +173,13 @@ public class StartActivity extends Activity {
 
     private class FetchItems extends AsyncTask<String, Void, JSONArray> {
 
-
         //Muestra un cartel que indica que se estan cargando los eventos antes de comenzar
         // a obtenerlos
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(StartActivity.this);
-            pDialog.setMessage("Cargando eventos....");
+            pDialog.setMessage("Cargando pagina " + (pagina + 1) + "....");
             pDialog.show();
         }
 
@@ -143,6 +191,7 @@ public class StartActivity extends Activity {
             String ruta = "http://dbaile.com/service/evento";
 
             ruta = ruta + "?language=es";
+            ruta = ruta + "&page=" + pagina;
 
             if(enPortada) {
                 //disciplina = wp.getString("opcionesAlarmaSpinnerDisciplinaNombre", "");
@@ -174,10 +223,6 @@ public class StartActivity extends Activity {
             }
 
             HttpGet httpget = new HttpGet(ruta);
-
-            //HttpClient httpclient = new DefaultHttpClient();
-            //HttpGet httpget = new HttpGet("http://dbaile.com/service/evento?language=es");
-            //set header to tell REST endpoint the request and response content types
             httpget.setHeader("Accept", "application/json");
             httpget.setHeader("Content-type", "application/json");
 
@@ -207,6 +252,7 @@ public class StartActivity extends Activity {
             uriImagenes = new String[json.length()];
             nombreImagenes = new String[json.length()];
             bitmapImg = new Bitmap[json.length()];
+            fechas = new String[json.length()];
 
             //iterate through JSON to read the title of nodes
             for(int i=0;i<json.length();i++){
@@ -219,10 +265,15 @@ public class StartActivity extends Activity {
                     titulos[i] = titulo;
                     uriImagenes[i] = "http://dbaile.com/sites/default/files/styles/medium/public" + json.getJSONObject(i).getJSONObject("cartel").getString("uri").substring(8);
                     nombreImagenes[i] = json.getJSONObject(i).getJSONObject("cartel").getString("filename");
-                    try {
-                        bitmapImg[i] = downloadImage(uriImagenes[i], nombreImagenes[i]);
-                    } catch (Exception e) {
-                        Log.e("descargar imagen: ", e.getMessage());
+                    fechas[i] = json.getJSONObject(i).getJSONObject("fecha_evento").getString("value").substring(0,10);
+                    bitmapImg[i] = obtenerArchivos(nombreImagenes[i]);
+
+                    if(bitmapImg[i] == null) {
+                        try {
+                            bitmapImg[i] = downloadImage(uriImagenes[i], nombreImagenes[i]);
+                        } catch (Exception e) {
+                            Log.e("descargar imagen: ", e.getMessage());
+                        }
                     }
 
                     listItems.add(titulo);
@@ -241,7 +292,7 @@ public class StartActivity extends Activity {
             /*************** Añadido para poner las imagenes junto a los nombres ****************/
 
             ListaPersonalizadaInicio adapter = new
-                    ListaPersonalizadaInicio(StartActivity.this, titulos, bitmapImg);
+                    ListaPersonalizadaInicio(StartActivity.this, titulos, bitmapImg, fechas);
             lst=(ListView)findViewById(R.id.ListEventos);
             lst.setAdapter(adapter);
 
@@ -271,11 +322,9 @@ public class StartActivity extends Activity {
 
         private Bitmap downloadImage(String url, String nombreImagen) {
             Bitmap bitmap = null;
-            //bitmap = obtenerArchivos(nombreImagen);
             InputStream stream = null;
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bmOptions.inSampleSize = 1;
-
             try {
                 stream = getHttpConnection(url);
                 bitmap = BitmapFactory.
@@ -284,6 +333,7 @@ public class StartActivity extends Activity {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            saveImageToLocalStore(bitmap, nombreImagen);
             return bitmap;
         }
 
@@ -307,46 +357,68 @@ public class StartActivity extends Activity {
             return stream;
         }
 
-
     }
-
-    /*private Bitmap obtenerArchivos(String nombre){
+    //http://stackoverflow.com/questions/18073260/save-load-image-to-from-local-storage
+    //http://developer.android.com/training/basics/data-storage/files.html
+    private Bitmap obtenerArchivos(String nombre){
         Bitmap bitmap = null;
-        //Comprueba si las imagenes estan guardadas, si no las descarga
-        DbaileSQLOpenHelper dsoh =
-                new DbaileSQLOpenHelper(this, "DBdbaile", null, 1);
-
-        SQLiteDatabase db = dsoh.getWritableDatabase();
-
-        String[] campos = new String[] {"nombre"};
-        String[] args = new String[] {nombre};
-
-        Cursor c = db.query("imagenesGuardadas", campos, "nombre=?", args, null, null, null);
-
-        if (c.moveToFirst()) {
-
-            // http://stackoverflow.com/questions/17546718/android-getting-external-storage-absolute-path
-            String dirname = context.getFilesDir() + "/img/eventos/min/";
-            File sddir = new File(dirname);
-            if (!sddir.mkdirs()) {
-                if (sddir.exists()) {
-                    try {
-                        FileOutputStream fos = new FileOutputStream(dirname + nombre);
-                        // http://www.developer.com/ws/android/programming/Working-with-Images-in-Googles-Android-3748281.htm
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fos);
-                        fos.flush();
-                        fos.close();
-                    } catch (Exception e) {
-                        Log.e("GetIMG:", e.toString());
-                    }
-                } else {
-                    return null;
-                }
+        // http://stackoverflow.com/questions/17546718/android-getting-external-storage-absolute-path
+        String dirname = Environment.getExternalStorageDirectory().toString() + "/dbaile/evento";
+        File sddir = new File(dirname);
+        if (sddir.exists() && isExternalStorageReadable()) {
+            try {
+                Uri uri = Uri.parse("file://" + Environment.getExternalStorageDirectory().toString() + "/dbaile/evento/" + nombre);
+                bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
+            } catch (Exception e) {
+                Log.e("GetIMG:", e.toString());
             }
-
-
+        } else {
+            return null;
         }
         return bitmap;
-    }*/
+    }
+
+    private void saveImageToLocalStore(Bitmap finalBitmap, String imgName) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/dbaile/evento");
+        if(myDir.mkdirs() || myDir.exists()) {
+            String fname = imgName;
+            File file = new File(myDir, fname);
+            if (!file.exists() || isExternalStorageWritable()) {
+                try {
+
+                    FileOutputStream out = new FileOutputStream(file);
+                    finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                    out.flush();
+                    out.close();
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri
+                            .parse("file://"
+                                    + Environment.getExternalStorageDirectory() + "/dbaile/evento/" + imgName)));
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
 
 }

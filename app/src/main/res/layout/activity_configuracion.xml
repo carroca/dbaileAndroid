@@ -9,9 +9,18 @@
     android:background="#E2F4FB"
     tools:context="net.rbcode.dbaile.ConfiguracionActivity">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/publicidadLayout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/publicidadLayout"
         android:id="@+id/scrollView">
 
         <RelativeLayout

@@ -55,7 +55,7 @@ public class SchedulingService extends IntentService {
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mNotificationManager = (NotificationManager)
                this.getSystemService(Context.NOTIFICATION_SERVICE);
-    
+
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
             new Intent(this, EventoActivity.class), 0);
 
@@ -67,7 +67,8 @@ public class SchedulingService extends IntentService {
         .setStyle(new NotificationCompat.BigTextStyle()
                 .bigText(msg))
         .setLights(Color.MAGENTA, 500, 500)
-        .setContentText(msg);
+        .setContentText(msg)
+        .setAutoCancel(true);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

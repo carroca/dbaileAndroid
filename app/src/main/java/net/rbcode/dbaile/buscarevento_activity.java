@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -49,6 +50,11 @@ public class buscarevento_activity extends Activity {
         GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "BuscarEventoActivity");
         gadb.enviarDatos();
 
+        //Carga la publicidad
+        LinearLayout layout = (LinearLayout)findViewById(R.id.publicidadLayout);
+        AdMobDbaile amd = new AdMobDbaile(context, layout);
+        amd.load();
+
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -67,8 +73,8 @@ public class buscarevento_activity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.start, menu);
+        /*MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.start, menu);*/
         MenuInflater menuComun = getMenuInflater();
         menuComun.inflate(R.menu.comun, menu);
         return super.onCreateOptionsMenu(menu);

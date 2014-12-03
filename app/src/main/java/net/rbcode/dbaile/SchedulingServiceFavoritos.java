@@ -111,7 +111,9 @@ public class SchedulingServiceFavoritos extends IntentService {
         .setStyle(new NotificationCompat.BigTextStyle()
                 .bigText(msg))
         .setLights(Color.MAGENTA, 500, 500)
-        .setContentText(msg);
+        .setContentText(msg)
+        //http://stackoverflow.com/questions/2632272/android-notification-doesnt-disappear-after-clicking-the-notifcation
+        .setAutoCancel(true);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

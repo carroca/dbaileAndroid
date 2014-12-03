@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbaileSQLOpenHelper extends SQLiteOpenHelper  {
 
-    String sqlCreate = "CREATE TABLE favoritos (nid INTEGER, titulo TEXT, fecha TEXT, nombreImagen TEXT, rutaImagen);" +
-            "CREATE TABLE imagenesGuardadas (nombre TEXT);";
+    String sqlCreate = "CREATE TABLE favoritos (nid INTEGER, titulo TEXT, fecha TEXT, nombreImagen TEXT, rutaImagen);";
+    String sqlCreateImagenesGuardadas = "CREATE TABLE imagenesGuardadas (nombre TEXT);";
 
     public DbaileSQLOpenHelper(Context contexto, String nombre,
                                 CursorFactory factory, int version) {
@@ -18,6 +18,7 @@ public class DbaileSQLOpenHelper extends SQLiteOpenHelper  {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(sqlCreate);
+        db.execSQL(sqlCreateImagenesGuardadas);
     }
 
     @Override

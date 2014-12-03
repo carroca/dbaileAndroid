@@ -7,14 +7,24 @@
     android:background="#E2F4FB"
     tools:context="net.rbcode.dbaile.VerFavoritosActivity">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/publicidadLayout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/publicidadLayout"
         android:id="@+id/ListEventos"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:drawSelectorOnTop="false"
         android:clickable="true" />
+
+
 
 </RelativeLayout>

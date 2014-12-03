@@ -11,15 +11,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -37,6 +43,7 @@ public class VerFavoritosActivity extends Activity {
     String[] titulos;
     String[] urlImagenes;
     String[] nombreImagenes;
+    String[] fechas;
     Bitmap[] bitmapImg;
 
     ListView lst;
@@ -57,20 +64,25 @@ public class VerFavoritosActivity extends Activity {
         GAnalitycsDbaile gadb = new GAnalitycsDbaile(context, "VerFavoritosActivity");
         gadb.enviarDatos();
 
+        //Carga la publicidad
+        LinearLayout layout = (LinearLayout)findViewById(R.id.publicidadLayout);
+        AdMobDbaile amd = new AdMobDbaile(context, layout);
+        amd.load();
+
         obtenerEventos();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.start, menu);
+        /*MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.start, menu);*/
 
         //MenuInflater inflater2 = getMenuInflater();
         //inflater2.inflate(R.menu.share, menu);
 
-        /*MenuInflater menuComun = getMenuInflater();
-        menuComun.inflate(R.menu.comun, menu);*/
+        MenuInflater menuComun = getMenuInflater();
+        menuComun.inflate(R.menu.comun, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -112,6 +124,7 @@ public class VerFavoritosActivity extends Activity {
             urlImagenes = new String[c.getCount()];
             nombreImagenes = new String[c.getCount()];
             bitmapImg = new Bitmap[c.getCount()];
+            fechas = new String[c.getCount()];
 
             int x = 0;
 
@@ -124,7 +137,9 @@ public class VerFavoritosActivity extends Activity {
                     titulos[x] = c.getString(1);
                 }
 
+                fechas[x] = c.getString(2);
                 urlImagenes[x] = "http://dbaile.com/sites/default/files/styles/medium/public" + c.getString(4);
+                nombreImagenes[x] = c.getString(3);
                 x++;
             } while (c.moveToNext());
             new FetchItems().execute();
@@ -140,7 +155,6 @@ public class VerFavoritosActivity extends Activity {
         }
 
     }
-
 
     @Override
     public void onPause() {
@@ -175,7 +189,16 @@ public class VerFavoritosActivity extends Activity {
 
         protected Bitmap[] doInBackground(String... params) {
             for (int x = 0; x < bitmapImg.length; x++){
-                bitmapImg[x] = downloadImage(urlImagenes[x]);
+
+                bitmapImg[x] = obtenerArchivos(nombreImagenes[x]);
+
+                if(bitmapImg[x] == null) {
+                    try {
+                        bitmapImg[x] = downloadImage(urlImagenes[x], nombreImagenes[x]);
+                    } catch (Exception e) {
+                        Log.e("descargar imagen: ", e.getMessage());
+                    }
+                }
             }
 
             return bitmapImg;
@@ -186,7 +209,7 @@ public class VerFavoritosActivity extends Activity {
             /*************** Añadido para poner las imagenes junto a los nombres ****************/
 
             ListaPersonalizadaInicio adapter = new
-                    ListaPersonalizadaInicio(VerFavoritosActivity.this, titulos, bitmapImg);
+                    ListaPersonalizadaInicio(VerFavoritosActivity.this, titulos, bitmapImg, fechas);
             lst=(ListView)findViewById(R.id.ListEventos);
             lst.setAdapter(adapter);
 
@@ -207,7 +230,7 @@ public class VerFavoritosActivity extends Activity {
 
         }
 
-        private Bitmap downloadImage(String url) {
+        private Bitmap downloadImage(String url, String nombreImagen) {
             Bitmap bitmap = null;
             InputStream stream = null;
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -221,6 +244,7 @@ public class VerFavoritosActivity extends Activity {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            saveImageToLocalStore(bitmap, nombreImagen);
             return bitmap;
         }
 
@@ -243,5 +267,68 @@ public class VerFavoritosActivity extends Activity {
             }
             return stream;
         }
+    }
+
+    //http://stackoverflow.com/questions/18073260/save-load-image-to-from-local-storage
+    //http://developer.android.com/training/basics/data-storage/files.html
+    private Bitmap obtenerArchivos(String nombre){
+        Bitmap bitmap = null;
+        // http://stackoverflow.com/questions/17546718/android-getting-external-storage-absolute-path
+        String dirname = Environment.getExternalStorageDirectory().toString() + "/dbaile/evento";
+        File sddir = new File(dirname);
+        if (sddir.exists() && isExternalStorageReadable()) {
+            try {
+                Uri uri = Uri.parse("file://" + Environment.getExternalStorageDirectory().toString() + "/dbaile/evento/" + nombre);
+                bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
+            } catch (Exception e) {
+                Log.e("GetIMG:", e.toString());
+            }
+        } else {
+            return null;
+        }
+        return bitmap;
+    }
+
+    private void saveImageToLocalStore(Bitmap finalBitmap, String imgName) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/dbaile/evento");
+        if(myDir.mkdirs() || myDir.exists()) {
+            String fname = imgName;
+            File file = new File(myDir, fname);
+            if (!file.exists() || isExternalStorageWritable()) {
+                try {
+
+                    FileOutputStream out = new FileOutputStream(file);
+                    finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                    out.flush();
+                    out.close();
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri
+                            .parse("file://"
+                                    + Environment.getExternalStorageDirectory() + "/dbaile/evento/" + imgName)));
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class Evento {
 
     protected int nid;
-    protected String title = "";
+    protected String title = "dBaile";
     protected String body = "";
     protected String imgUrl = "";
     protected String imgUri = "";
@@ -23,6 +23,7 @@ public class Evento {
     protected String precio = "";
     protected String disciplina = "";
     protected String imgName = "";
+    protected String path = "http://www.dbaile.com";
     protected Bitmap img;
     protected JSONObject disciplinaJObject;
 
@@ -89,8 +90,6 @@ public class Evento {
     public String getImgName(){
         return this.imgName;
     }
-
-
 
     public Evento setFecha(String n){
         this.fecha = n;
@@ -160,5 +159,14 @@ public class Evento {
     }
 
     public String getImgUri(){ return this.imgUri; }
+
+    public Evento setPath(String n){
+        this.path = n;
+        return this;
+    }
+
+    public String getPath(){
+        return this.path;
+    }
 
 }
