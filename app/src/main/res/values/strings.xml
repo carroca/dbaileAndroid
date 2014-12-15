@@ -25,36 +25,35 @@
     <string name="action_siguiente">Siguiente pagina</string>
     <string name="action_anterior">Pagina anterior</string>
 
-     <!-- Textos para opciones -->
-
+    <!-- Textos para opciones -->
     <string name="opcion_filtro_para_portada">Filtrar en portada</string>
 
     <!-- Textos -->
-
     <string name="texto_ayuda">Si necesitas ayuda o encuentras algun fallo en la app, puedes contactar con nosotros
     a traves de android.app@dbaile.com</string>
 
     <!-- Campos -->
-
     <string name="field_login_info">Inicia sesion</string>
     <string name="field_login_user">Usuario</string>
     <string name="field_login_password">Contraseña</string>
     <string name="field_login_do_login">Conectar</string>
 
     <!-- Dialogos -->
-
     <string name="dialog_eventos_no_encontrados">No se encontraron eventos</string>
+    <string name="dialog_comentarios_no_encontrados">No hay comentarios, vuelve atras o crea uno nuevo</string>
     <string name="dialog_eventos_anadido_favoritos">Se ha añadido el evento a favoritos</string>
     <string name="dialog_eventos_eliminado_favoritos">Se ha eliminado el evento de favoritos</string>
     <string name="dialog_seleccionar_disciplina">Selecciona las disciplinas</string>
     <string name="dialog_eventos_favoritos_no_encontrados">No tienes ningun evento a favoritos</string>
-    <!-- Varios -->
 
+    <!-- Varios -->
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="nuevo">Nuevo</string>
     <string name="back">Atras</string>
     <string name="hello_world">Hello world!</string>
     <string name="app_id">1513825982200241</string>
     <string name="title_activity_login">Inicio de sesion</string>
+    <string name="title_activity_ver_comentarios">Comentarios</string>
 
 </resources>

@@ -36,11 +36,8 @@ public class ListaPersonalizadaInicio extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
-        //url = "http://dbaile.com/sites/default/files/styles/medium/public/" + imageURL[position];
-        //new FetchItems().execute();
-
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.lista_personalizada_inicio, null, true);
+        View rowView = inflater.inflate(R.layout.lista_personalizada_inicio, null, true);
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txtLista);
         imageView = (ImageView) rowView.findViewById(R.id.imgLista);
@@ -53,8 +50,6 @@ public class ListaPersonalizadaInicio extends ArrayAdapter<String> {
             imageView.setImageBitmap(bitmapImg[position]);
         } catch (Exception e) {}
 
-
-        //imageView.setImageResource(imageURL[position]);
         return rowView;
     }
 }

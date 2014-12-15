@@ -23,7 +23,8 @@
         android:layout_marginRight="-6dp"
         android:layout_marginBottom="-6dp"
         android:layout_marginTop="-6dp"
-        android:layout_below="@+id/publicidadLayout">
+        android:layout_below="@+id/publicidadLayout"
+        android:id="@+id/scrollView2">
 
     <LinearLayout
         android:orientation="vertical"
@@ -124,7 +125,18 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="4dp" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver comentarios"
+            android:id="@+id/buttonVerComentario"
+            android:layout_below="@+id/textDescripcion"
+            android:onClick="VerComentarios"/>
+
     </LinearLayout>
     </ScrollView>
+
+
+
 
 </RelativeLayout>

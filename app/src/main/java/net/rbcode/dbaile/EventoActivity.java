@@ -320,6 +320,12 @@ public class EventoActivity extends Activity {
         startActivity(pantalla);
     }
 
+    public void VerComentarios(View v){
+        Intent pantalla = new Intent(this, VerComentariosActivity.class);
+        pantalla.putExtra("nid", e.getNid());
+        startActivity(pantalla);
+    }
+
     private class FetchItems extends AsyncTask<String, Void, JSONObject> {
 
         @Override
