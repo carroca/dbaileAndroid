@@ -13,12 +13,10 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            zipAlign true
             debuggable false
-            jniDebugBuild false
-            renderscriptDebugBuild false
+            minifyEnabled true
+            zipAlignEnabled true
         }
         debug {
         }

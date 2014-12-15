@@ -24,8 +24,8 @@
     <string name="action_ver_favoritos">Ver los favoritos</string>
     <string name="action_siguiente">Siguiente pagina</string>
     <string name="action_anterior">Pagina anterior</string>
-    action_ver_favoritos
-    <!-- Textos para opciones -->
+
+     <!-- Textos para opciones -->
 
     <string name="opcion_filtro_para_portada">Filtrar en portada</string>
 
@@ -33,6 +33,13 @@
 
     <string name="texto_ayuda">Si necesitas ayuda o encuentras algun fallo en la app, puedes contactar con nosotros
     a traves de android.app@dbaile.com</string>
+
+    <!-- Campos -->
+
+    <string name="field_login_info">Inicia sesion</string>
+    <string name="field_login_user">Usuario</string>
+    <string name="field_login_password">Contraseña</string>
+    <string name="field_login_do_login">Conectar</string>
 
     <!-- Dialogos -->
 
@@ -48,5 +55,6 @@
     <string name="back">Atras</string>
     <string name="hello_world">Hello world!</string>
     <string name="app_id">1513825982200241</string>
+    <string name="title_activity_login">Inicio de sesion</string>
 
 </resources>

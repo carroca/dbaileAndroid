@@ -163,6 +163,11 @@ public class StartActivity extends Activity {
                     return true;
                 }
                 return false;
+            case R.id.action_login:
+                pantalla = new Intent(this, LoginActivity.class);
+                startActivity(pantalla);
+                this.finish();
+                return true;
             /*case R.id.action_help:
                 pantalla = new Intent(this, AyudaActivity.class);
                 startActivity(pantalla);
@@ -255,7 +260,7 @@ public class StartActivity extends Activity {
             fechas = new String[json.length()];
 
             //iterate through JSON to read the title of nodes
-            for(int i=0;i<json.length();i++){
+            for(int i = 0; i < json.length(); i++){
                 try {
                     titulo = json.getJSONObject(i).getString("title");
 

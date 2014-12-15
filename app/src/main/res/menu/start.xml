@@ -8,4 +8,7 @@
     <item android:id="@+id/action_anterior"
         android:title="@string/action_anterior"
         android:showAsAction="never" />
+    <item android:id="@+id/action_login"
+        android:title="Iniciar sesion"
+        android:showAsAction="never" />
 </menu>
