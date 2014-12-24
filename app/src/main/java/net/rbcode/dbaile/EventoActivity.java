@@ -330,9 +330,10 @@ public class EventoActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
             pDialog = new ProgressDialog(EventoActivity.this);
-            pDialog.setMessage("Cargando el evento....");
+            pDialog.setMessage(getResources().getString(R.string.dialog_cargando_eventos));
             pDialog.show();
         }
 
@@ -525,7 +526,7 @@ public class EventoActivity extends Activity {
     public void shareWhatsapp()
     {
         String message;
-        message = "Mira este evento en dbaile: " + e.getPath();
+        message = getResources().getString(R.string.social_whatsapp_compartir) + e.getPath();
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, message);
@@ -535,12 +536,10 @@ public class EventoActivity extends Activity {
     }
     public void shareGooglePlus()
     {
-        String message;
-        message = "Mira este evento " + e.getPath();
         // Launch the Google+ share dialog with attribution to your app.
         Intent shareIntent = new PlusShare.Builder(this)
                 .setType("text/plain")
-                .setText("Mira este evento de dbaile:")
+                .setText(getResources().getString(R.string.social_googleplus_compartir))
                 .setContentUrl(Uri.parse(e.getPath()))
                 .getIntent();
 

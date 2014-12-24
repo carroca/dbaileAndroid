@@ -10,6 +10,7 @@
     <string name="title_activity_configuracion">Opciones</string>
     <string name="title_activity_ver_imagen">Imagen</string>
     <string name="title_activity_ver_favoritos">Eventos favoritos</string>
+    <string name="title_activity_ayuda">Ayuda</string>
 
     <!-- Nombre de los menus -->
     <string name="add_favotiro">Añadir a favorito</string>
@@ -20,7 +21,6 @@
     <string name="action_settings">Opciones</string>
     <string name="action_help">Ayuda</string>
     <string name="action_whois">Acerca de</string>
-    <string name="title_activity_ayuda">Ayuda</string>
     <string name="action_ver_favoritos">Ver los favoritos</string>
     <string name="action_siguiente">Siguiente pagina</string>
     <string name="action_anterior">Pagina anterior</string>
@@ -45,6 +45,8 @@
     <string name="dialog_eventos_eliminado_favoritos">Se ha eliminado el evento de favoritos</string>
     <string name="dialog_seleccionar_disciplina">Selecciona las disciplinas</string>
     <string name="dialog_eventos_favoritos_no_encontrados">No tienes ningun evento a favoritos</string>
+    <string name="dialog_cargando_paginas">Cargando pagina... </string>
+    <string name="dialog_cargando_eventos">Cargando el evento...</string>
 
     <!-- Varios -->
     <string name="accept">Aceptar</string>
@@ -55,5 +57,11 @@
     <string name="app_id">1513825982200241</string>
     <string name="title_activity_login">Inicio de sesion</string>
     <string name="title_activity_ver_comentarios">Comentarios</string>
+
+    <!-- Social -->
+    <string name="social_whatsapp_compartir">Mira este evento en dbaile: </string>
+    <string name="social_googleplus_compartir">Mira este evento en dbaile: </string>
+    <string name="social_facebook_compartir">Mira este evento en dbaile: </string>
+    <string name="social_twitter_compartir">Mira este evento en dbaile: </string>
 
 </resources>

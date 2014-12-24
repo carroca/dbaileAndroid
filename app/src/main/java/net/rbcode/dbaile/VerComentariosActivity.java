@@ -42,6 +42,8 @@ import java.util.TimeZone;
 
 public class VerComentariosActivity extends Activity {
 
+    //Como crear comentarios
+    // http://drupal.stackexchange.com/questions/22277/creating-comments-and-nodes-with-services-3-x-and-json
     private int nid;
 
     protected int[] cid;
@@ -154,11 +156,6 @@ public class VerComentariosActivity extends Activity {
             }catch (Exception e) {
                 Log.v("Error al obtener los comentarios", e.getMessage());
             }
-
-            //get the ListView UI element
-            //ListView lst = (ListView) findViewById(R.id.ListComentarios);
-            //create the ArrayList to store the titles of nodes
-            //ArrayList<String> listItems=new ArrayList<String>();
 
             cid = new int[json.length()];
             userName = new String[json.length()];

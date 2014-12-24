@@ -179,7 +179,7 @@ public class ListarEventosBuscadosActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(ListarEventosBuscadosActivity.this);
-            pDialog.setMessage("Cargando pagina " + (pagina + 1) + "....");
+            pDialog.setMessage(getResources().getString(R.string.dialog_cargando_paginas) + (pagina + 1));
             pDialog.show();
         }
 
