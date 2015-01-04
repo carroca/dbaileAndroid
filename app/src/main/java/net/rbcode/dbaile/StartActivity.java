@@ -52,7 +52,7 @@ public class StartActivity extends Activity {
 
     ProgressDialog pDialog;
 
-    ListView lst;
+    GridView lst;
     ArrayList<String> listItems;
 
     SharedPreferences wp;
@@ -245,7 +245,7 @@ public class StartActivity extends Activity {
             }
 
             //get the ListView UI element
-            ListView lst = (ListView) findViewById(R.id.ListEventos);
+            GridView lst = (GridView) findViewById(R.id.ListEventos);
             //create the ArrayList to store the titles of nodes
             ArrayList<String> listItems=new ArrayList<String>();
 
@@ -264,8 +264,8 @@ public class StartActivity extends Activity {
                 try {
                     titulo = json.getJSONObject(i).getString("title");
 
-                    if(titulo.length() > 70){
-                        titulo = titulo.substring(0,70);
+                    if(titulo.length() > 40){
+                        titulo = titulo.substring(0,40);
                     }
                     titulos[i] = titulo;
                     uriImagenes[i] = "http://dbaile.com/sites/default/files/styles/medium/public" + json.getJSONObject(i).getJSONObject("cartel").getString("uri").substring(8);
@@ -296,9 +296,9 @@ public class StartActivity extends Activity {
 
             /*************** Añadido para poner las imagenes junto a los nombres ****************/
 
-            ListaPersonalizadaInicio adapter = new
-                    ListaPersonalizadaInicio(StartActivity.this, titulos, bitmapImg, fechas);
-            lst=(ListView)findViewById(R.id.ListEventos);
+            GridPersonalizadaInicio adapter = new
+                    GridPersonalizadaInicio(StartActivity.this, titulos, bitmapImg, fechas);
+            lst=(GridView)findViewById(R.id.ListEventos);
             lst.setAdapter(adapter);
 
              /*******************************/
