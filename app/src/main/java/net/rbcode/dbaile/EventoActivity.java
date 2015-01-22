@@ -160,8 +160,8 @@ public class EventoActivity extends Activity {
         MenuInflater inflaterShare = getMenuInflater();
         inflaterShare.inflate(R.menu.share, menu);
 
-        MenuInflater menuComun = getMenuInflater();
-        menuComun.inflate(R.menu.comun, menu);
+        /*MenuInflater menuComun = getMenuInflater();
+        menuComun.inflate(R.menu.comun, menu);*/
 
         DbaileSQLOpenHelper dsoh =
                 new DbaileSQLOpenHelper(this, "DBdbaile", null, 1);
@@ -190,23 +190,23 @@ public class EventoActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent pantalla;
         switch (item.getItemId()) {
-            case R.id.action_BuscarEvento:
+            /*case R.id.action_BuscarEvento:
                 pantalla = new Intent(this, buscarevento_activity.class);
                 startActivity(pantalla);
                 return true;
             case R.id.action_configuracion:
                 pantalla = new Intent(this, ConfiguracionActivity.class);
                 startActivity(pantalla);
-                return true;
+                return true;*/
             case android.R.id.home:
                 pantalla = new Intent(this, StartActivity.class);
                 startActivity(pantalla);
                 this.finish();
                 return true;
-            case R.id.action_ver_favoritos:
+            /*case R.id.action_ver_favoritos:
                 pantalla = new Intent(this, VerFavoritosActivity.class);
                 startActivity(pantalla);
-                return true;
+                return true;*/
             /*case R.id.action_help:
                 pantalla = new Intent(this, AyudaActivity.class);
                 startActivity(pantalla);

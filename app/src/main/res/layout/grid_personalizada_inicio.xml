@@ -5,8 +5,16 @@
 
     <ImageView
         android:id="@+id/imgLista"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/txtLista"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
         android:layout_margin="4dp"/>
 
     <TextView
@@ -14,13 +22,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp"/>
-
-    <TextView
-        android:id="@+id/txtLista"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical" />
+        android:layout_margin="4dp"
+        android:gravity="center"/>
 
 </LinearLayout>

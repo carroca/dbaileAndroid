@@ -283,6 +283,8 @@ public class StartActivity extends Activity {
 
                     listItems.add(titulo);
                     nid[i] = json.getJSONObject(i).getInt("nid");
+
+                    //bitmapImg[i] = Bitmap.createBitmap(bitmapImg[i], 0, 0, 280, 280);
                 } catch (Exception e) {
                     Log.v("Error al sacar datos de los nodos", e.getMessage());
                 }

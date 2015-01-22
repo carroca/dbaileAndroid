@@ -13,7 +13,7 @@
     <string name="title_activity_ayuda">Ayuda</string>
 
     <!-- Nombre de los menus -->
-    <string name="add_favotiro">Añadir a favorito</string>
+    <string name="action_add_favotiro">Añadir a favorito</string>
     <string name="facebook_share">Facebook</string>
     <string name="twitter_share">Twitter</string>
     <string name="google_plus_share">Google+</string>
@@ -24,6 +24,7 @@
     <string name="action_ver_favoritos">Ver los favoritos</string>
     <string name="action_siguiente">Siguiente pagina</string>
     <string name="action_anterior">Pagina anterior</string>
+    <string name="action_add_comment">Añadir comentario</string>
 
     <!-- Textos para opciones -->
     <string name="opcion_filtro_para_portada">Filtrar en portada</string>

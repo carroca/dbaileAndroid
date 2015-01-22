@@ -102,24 +102,15 @@ public class LoginActivity extends Activity {
                 Log.e("session_name", session_name);
                 Log.e("session_id", session_id);
 
+                Log.e("session_token", jsonObject.getString("token"));
+
                 /*************
                  * Empezar a eliminar
                  */
 
-                try {
+                /*try {
 
-                    //get title and body UI elements
-                    //extract text from UI elements and remove extra spaces
-                    String title="contenido 1";
-                    String body="contenido 2";
-
-
-                    //add raw json to be sent along with the HTTP POST request
-                    StringEntity set = new StringEntity( " { \"title\":\""+title+"\",\"type\":\"article\",\"body\":{\"und\":[{ \"value\":\""+body+"\"}]}}");
-                    set.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    set.setContentType(new BasicHeader("X-CSRF-Token", token));
-                    httppost.setEntity(set);
-
+                    HttpPost userToken = new HttpPost("http://dbaile.com/service/user/token");
 
                     BasicHttpContext mHttpContext = new BasicHttpContext();
                     CookieStore mCookieStore      = new BasicCookieStore();
@@ -127,7 +118,7 @@ public class LoginActivity extends Activity {
                     //create the session cookie
                     BasicClientCookie cookie = new BasicClientCookie(session_name, session_id);
                     cookie.setVersion(0);
-                    cookie.setDomain(".ec2-54-244-72-198.us-west-2.compute.amazonaws.com");
+                    cookie.setDomain("dbaile.com");
                     cookie.setPath("/");
 
                     mCookieStore.addCookie(cookie);
@@ -135,22 +126,31 @@ public class LoginActivity extends Activity {
                     mCookieStore.addCookie(cookie);
                     mHttpContext.setAttribute(ClientContext.COOKIE_STORE, mCookieStore);
 
-                    httpclient.execute(httppost,mHttpContext);
+                    HttpResponse responseToken =  httpclient.execute(userToken,mHttpContext);
+
+                    //read the response from Services endpoint
+                    String jsonResponseToken = EntityUtils.toString(responseToken.getEntity());
+
+                    JSONObject jsonObjectToken = new JSONObject(jsonResponseToken);
+
+                    token = jsonObjectToken.getString("token");
+
+                    Log.e("token", jsonObjectToken.getString("token"));
 
                     return 0;
 
                 }catch (Exception e) {
-                    Log.v("Error adding article",e.getMessage());
+                    Log.v("Error al bobtener el token",e.getMessage());
                 }
 
-                return 0;
+                return 0;*/
 
                 /*****************
                  * Fin de eliminar
-                 */
+                 ****************/
 
             }catch (Exception e) {
-                Log.v("Error adding article", e.getMessage());
+                Log.v("Error al iniciar sesion", e.getMessage());
             }
 
             return 0;

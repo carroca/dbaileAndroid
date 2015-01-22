@@ -2,7 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="net.rbcode.dbaile.EventoActivity" >
     <item android:id="@+id/action_anadir_favorito"
-        android:title="@string/add_favotiro"
+        android:title="@string/action_add_favotiro"
         android:icon="@drawable/ic_action_favotiros_del"
-        android:showAsAction="always" /> />
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/action_add_comment"
+        android:icon="@drawable/ic_action_new_event"
+        android:showAsAction="always"
+        android:title="@string/action_add_comment"
+        />
 </menu>
