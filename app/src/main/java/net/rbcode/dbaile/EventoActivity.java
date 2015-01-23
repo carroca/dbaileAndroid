@@ -203,6 +203,11 @@ public class EventoActivity extends Activity {
                 startActivity(pantalla);
                 this.finish();
                 return true;
+            case R.id.action_add_comment:
+                pantalla = new Intent(this, AddCommentActivity.class);
+                pantalla.putExtra("nid", e.getNid());
+                startActivity(pantalla);
+                return true;
             /*case R.id.action_ver_favoritos:
                 pantalla = new Intent(this, VerFavoritosActivity.class);
                 startActivity(pantalla);

@@ -1,6 +1,8 @@
 package net.rbcode.dbaile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -32,10 +34,15 @@ public class LoginActivity extends Activity {
     public String session_id;
     public String token;
 
+    SharedPreferences wp;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
     }
 
 
@@ -99,6 +106,8 @@ public class LoginActivity extends Activity {
                 session_id=jsonObject.getString("sessid");
                 token = jsonObject.getString("token");
 
+
+
                 Log.e("session_name", session_name);
                 Log.e("session_id", session_id);
 
@@ -157,6 +166,14 @@ public class LoginActivity extends Activity {
         }
 
         protected void onPostExecute(Integer result) {
+
+            wp =  getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+            editor = wp.edit();
+
+            editor.putString("session_name", session_name);
+            editor.putString("session_id", session_id);
+            editor.putString("token", token);
+            editor.commit();
             //create an intent to start the ListActivity
             //Intent intent = new Intent(LoginActivity.this, StartActivity.class);
             //pass the session_id and session_name to ListActivity
@@ -169,6 +186,7 @@ public class LoginActivity extends Activity {
 
     //click listener for doLogin button
     public void doLoginButton_click(View view){
+
         new LoginProcess().execute();
     }
 }

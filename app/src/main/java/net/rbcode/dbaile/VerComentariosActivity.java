@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -117,11 +118,13 @@ public class VerComentariosActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent pantalla;
+        switch (item.getItemId()) {
+            case R.id.action_add_comment:
+                pantalla = new Intent(this, AddCommentActivity.class);
+                pantalla.putExtra("nid", nid);
+                startActivity(pantalla);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -211,7 +214,10 @@ public class VerComentariosActivity extends Activity {
                         .setTitle(R.string.dialog_comentarios_no_encontrados)
                         .setPositiveButton(R.string.nuevo, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                finish();
+                                Intent pantalla;
+                                pantalla = new Intent(context, AddCommentActivity.class);
+                                pantalla.putExtra("nid", nid);
+                                startActivity(pantalla);
                             }
                         })
                         .setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
