@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.apache.http.HttpResponse;
@@ -37,10 +38,19 @@ public class LoginActivity extends Activity {
     SharedPreferences wp;
     SharedPreferences.Editor editor;
 
+    public CheckBox checkBox;
+
+    EditText username, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        checkBox = (CheckBox) findViewById(R.id.checkBoxMantenerSesion);
+
+        username= (EditText) findViewById(R.id.editUser);
+        password= (EditText) findViewById(R.id.editPassword);
 
 
     }
@@ -74,14 +84,17 @@ public class LoginActivity extends Activity {
 
             HttpClient httpclient = new DefaultHttpClient();
 
+
+
+
+
             //set the remote endpoint URL
             HttpPost httppost = new HttpPost("http://dbaile.com/service/user/login");
 
             try {
 
                 //get the UI elements for username and password
-                EditText username= (EditText) findViewById(R.id.editUser);
-                EditText password= (EditText) findViewById(R.id.editPassword);
+
 
                 JSONObject json = new JSONObject();
                 //extract the username and password from UI elements and create a JSON object
@@ -105,8 +118,6 @@ public class LoginActivity extends Activity {
                 session_name=jsonObject.getString("session_name");
                 session_id=jsonObject.getString("sessid");
                 token = jsonObject.getString("token");
-
-
 
                 Log.e("session_name", session_name);
                 Log.e("session_id", session_id);
@@ -169,6 +180,11 @@ public class LoginActivity extends Activity {
 
             wp =  getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
             editor = wp.edit();
+
+            if (checkBox.isChecked()) {
+                editor.putString("userName", username.getText().toString().trim());
+                editor.putString("userPassword", password.getText().toString().trim());
+            }
 
             editor.putString("session_name", session_name);
             editor.putString("session_id", session_id);

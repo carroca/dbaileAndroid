@@ -55,17 +55,29 @@
         android:layout_alignEnd="@+id/editUser"
         android:layout_margin="8dp" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/field_login_save_session"
+        android:id="@+id/checkBoxMantenerSesion"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/editPassword"
+        android:layout_alignLeft="@+id/editPassword"
+        android:layout_alignStart="@+id/editPassword" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/field_login_do_login"
         android:id="@+id/field_login_do_login"
-        android:layout_below="@+id/editPassword"
+        android:layout_below="@+id/checkBoxMantenerSesion"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_alignRight="@+id/editPassword"
-        android:layout_alignEnd="@+id/editPassword"
-        android:layout_alignLeft="@+id/editPassword"
-        android:layout_alignStart="@+id/editPassword"
-        android:onClick="doLoginButton_click"/>
+        android:onClick="doLoginButton_click"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>

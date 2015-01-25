@@ -39,6 +39,7 @@
     <string name="field_login_user">Usuario</string>
     <string name="field_login_password">Contraseña</string>
     <string name="field_login_do_login">Conectar</string>
+    <string name="field_login_save_session">Mantener la sesion iniciada</string>
 
     <!-- Dialogos -->
     <string name="dialog_eventos_no_encontrados">No se encontraron eventos</string>
