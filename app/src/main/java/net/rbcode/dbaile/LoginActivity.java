@@ -1,6 +1,9 @@
 package net.rbcode.dbaile;
 
+import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -34,11 +37,16 @@ public class LoginActivity extends Activity {
     public String session_name;
     public String session_id;
     public String token;
+    public String uid;
+    public String userName;
+    public String userEmail;
 
     SharedPreferences wp;
     SharedPreferences.Editor editor;
 
     public CheckBox checkBox;
+
+    private static Context context;
 
     EditText username, password;
 
@@ -47,11 +55,31 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        context = getApplicationContext();
+
+        wp =  getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+        editor = wp.edit();
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         checkBox = (CheckBox) findViewById(R.id.checkBoxMantenerSesion);
 
         username= (EditText) findViewById(R.id.editUser);
         password= (EditText) findViewById(R.id.editPassword);
 
+        boolean ums = wp.getBoolean("userMantenerSesion", false);
+
+        if(ums == true){
+            username.setText(wp.getString("userName", null));
+            password.setText(wp.getString("userPassword", null));
+            checkBox.setChecked(true);
+        } else {
+            editor.putString("userName", null);
+            editor.putString("userPassword", null);
+            editor.putBoolean("userMantenerSesion", false);
+            checkBox.setChecked(false);
+        }
 
     }
 
@@ -65,14 +93,13 @@ public class LoginActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent pantalla;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                pantalla = new Intent(this, StartActivity.class);
+                startActivity(pantalla);
+                this.finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -84,18 +111,12 @@ public class LoginActivity extends Activity {
 
             HttpClient httpclient = new DefaultHttpClient();
 
-
-
-
-
             //set the remote endpoint URL
             HttpPost httppost = new HttpPost("http://dbaile.com/service/user/login");
 
             try {
 
                 //get the UI elements for username and password
-
-
                 JSONObject json = new JSONObject();
                 //extract the username and password from UI elements and create a JSON object
                 json.put("username", username.getText().toString().trim());
@@ -118,7 +139,9 @@ public class LoginActivity extends Activity {
                 session_name=jsonObject.getString("session_name");
                 session_id=jsonObject.getString("sessid");
                 token = jsonObject.getString("token");
-
+                uid = jsonObject.getJSONObject("user").getString("uid");
+                userName = jsonObject.getJSONObject("user").getString("name");
+                userEmail = jsonObject.getJSONObject("user").getString("mail");
                 Log.e("session_name", session_name);
                 Log.e("session_id", session_id);
 
@@ -130,7 +153,7 @@ public class LoginActivity extends Activity {
 
                 /*try {
 
-                    HttpPost userToken = new HttpPost("http://dbaile.com/service/user/token");
+                    HttpPost userLogout = new HttpPost("http://dbaile.com/service/user/logout");
 
                     BasicHttpContext mHttpContext = new BasicHttpContext();
                     CookieStore mCookieStore      = new BasicCookieStore();
@@ -146,21 +169,17 @@ public class LoginActivity extends Activity {
                     mCookieStore.addCookie(cookie);
                     mHttpContext.setAttribute(ClientContext.COOKIE_STORE, mCookieStore);
 
-                    HttpResponse responseToken =  httpclient.execute(userToken,mHttpContext);
+                    HttpResponse responseToken =  httpclient.execute(userLogout,mHttpContext);
 
                     //read the response from Services endpoint
                     String jsonResponseToken = EntityUtils.toString(responseToken.getEntity());
 
                     JSONObject jsonObjectToken = new JSONObject(jsonResponseToken);
 
-                    token = jsonObjectToken.getString("token");
-
-                    Log.e("token", jsonObjectToken.getString("token"));
-
                     return 0;
 
                 }catch (Exception e) {
-                    Log.v("Error al bobtener el token",e.getMessage());
+                    Log.v("Error al cerrar sesion",e.getMessage());
                 }
 
                 return 0;*/
@@ -178,31 +197,45 @@ public class LoginActivity extends Activity {
 
         protected void onPostExecute(Integer result) {
 
-            wp =  getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-            editor = wp.edit();
+
 
             if (checkBox.isChecked()) {
                 editor.putString("userName", username.getText().toString().trim());
                 editor.putString("userPassword", password.getText().toString().trim());
+                editor.putBoolean("userMantenerSesion", true);
+            } else {
+                editor.putBoolean("userMantenerSesion", false);
             }
 
             editor.putString("session_name", session_name);
             editor.putString("session_id", session_id);
             editor.putString("token", token);
+            editor.putString("uid", uid);
             editor.commit();
-            //create an intent to start the ListActivity
-            //Intent intent = new Intent(LoginActivity.this, StartActivity.class);
-            //pass the session_id and session_name to ListActivity
-            //intent.putExtra("SESSION_ID", session_id);
-            //intent.putExtra("SESSION_NAME", session_name);
-            //start the ListActivity
-            //startActivity(intent);
+
+            new AlertDialog.Builder(LoginActivity.this)
+                    .setTitle(R.string.dialog_session_iniciada)
+                    .setNeutralButton(R.string.back, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent pantalla;
+                            pantalla = new Intent(context, StartActivity.class);
+                            startActivity(pantalla);
+                            finish();
+                        }
+                    })
+                    .show();
         }
     }
 
     //click listener for doLogin button
     public void doLoginButton_click(View view){
-
         new LoginProcess().execute();
+    }
+
+    public void doRegisterButton_click(View v){
+        Intent pantalla;
+        pantalla = new Intent(context, RegistrarseActivity.class);
+        startActivity(pantalla);
+        finish();
     }
 }

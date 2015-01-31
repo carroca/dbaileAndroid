@@ -104,6 +104,10 @@
             android:name=".AddCommentActivity"
             android:label="@string/title_activity_add_comment" >
         </activity>
+        <activity
+            android:name=".RegistrarseActivity"
+            android:label="@string/title_activity_registrarse" >
+        </activity>
     </application>
 
 </manifest>

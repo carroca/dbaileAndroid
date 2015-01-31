@@ -12,6 +12,7 @@
     <string name="title_activity_ver_favoritos">Eventos favoritos</string>
     <string name="title_activity_ayuda">Ayuda</string>
     <string name="title_activity_add_comment">Añadir comentario</string>
+    <string name="title_activity_registrarse">Registrarse</string>
 
     <!-- Nombre de los menus -->
     <string name="action_add_favotiro">Añadir a favorito</string>
@@ -26,6 +27,7 @@
     <string name="action_siguiente">Siguiente pagina</string>
     <string name="action_anterior">Pagina anterior</string>
     <string name="action_add_comment">Añadir comentario</string>
+    <string name="action_logout">Cerrar sesion</string>
 
     <!-- Textos para opciones -->
     <string name="opcion_filtro_para_portada">Filtrar en portada</string>
@@ -38,8 +40,13 @@
     <string name="field_login_info">Inicia sesion</string>
     <string name="field_login_user">Usuario</string>
     <string name="field_login_password">Contraseña</string>
+    <string name="field_login_password_confirm">Confirmar contraseña</string>
     <string name="field_login_do_login">Conectar</string>
+    <string name="field_login_email">Correo electronico</string>
+    <string name="field_login_singin">Registrarse</string>
     <string name="field_login_save_session">Mantener la sesion iniciada</string>
+    <string name="field_login_sing_in_and_save_session">Registrarse y mantener la sesion iniciada</string>
+    <string name="field_login_sing_in">Registrarse</string>
 
     <!-- Dialogos -->
     <string name="dialog_eventos_no_encontrados">No se encontraron eventos</string>
@@ -50,6 +57,7 @@
     <string name="dialog_eventos_favoritos_no_encontrados">No tienes ningun evento a favoritos</string>
     <string name="dialog_cargando_paginas">Cargando pagina... </string>
     <string name="dialog_cargando_eventos">Cargando el evento...</string>
+    <string name="dialog_session_iniciada">Se ha iniciado sesion correctamente</string>
 
     <!-- Varios -->
     <string name="accept">Aceptar</string>
@@ -66,5 +74,6 @@
     <string name="social_googleplus_compartir">Mira este evento en dbaile: </string>
     <string name="social_facebook_compartir">Mira este evento en dbaile: </string>
     <string name="social_twitter_compartir">Mira este evento en dbaile: </string>
+
 
 </resources>
